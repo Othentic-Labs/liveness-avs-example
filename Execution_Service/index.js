@@ -5,12 +5,15 @@ const dalService = require("./src/dal.service");
 const healthcheckService = require("./src/healthcheck.service");
 const taskService = require("./src/task.service");
 const util = require("./src/liveliness/util");
+const { init } = require("./src/utils/mcl");
 
-dalService.init();
-healthcheckService.init();
-taskService.init();
-util.suppressEthersJsonRpcProviderError();
-util.setupDebugConsole();
-app.listen(PORT, () => console.log("Server started on port:", PORT))
-
-taskService.performTaskOnEpoch();
+(async () => {
+    dalService.init();
+    await init();
+    healthcheckService.init();
+    taskService.init();
+    util.suppressEthersJsonRpcProviderError();
+    util.setupDebugConsole();
+    app.listen(PORT, () => console.log("Server started on port:", PORT))
+    taskService.performTaskOnEpoch();
+})();

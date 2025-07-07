@@ -110,7 +110,8 @@ To start, deploy the AVS Logic Hook contract `LivelinessRegistry`, which manages
 
 1. Install the CLI
 ```
-npm install -g @othentic/othentic-cli
+   npm i -g @othentic/cli
+   npm i -g @othentic/node
 ```
 
 2. Clone the repo and switch branch
@@ -187,7 +188,7 @@ const data = await publicClient.readContract({
 ```
 
 ### Updating the Othentic node version
-To update the `othentic-cli` inside the docker images to the latest version, you
+To update the `othentic cli` inside the docker images to the latest version, you
 need to rebuild the images using the following command:
 ```console
 docker-compose build --no-cache

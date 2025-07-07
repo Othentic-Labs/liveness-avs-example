@@ -4,9 +4,10 @@
   "description": "External services for Liveliness AVS",
   "main": "index.js",
   "dependencies": {
-    "@othentic/othentic-cli": "latest",
+    "@othentic/cli": "latest",
+    "@othentic/node": "latest"
   },
   "scripts": {
-    "start": "othentic-cli"
+    "start": "otnode"
   }
 } 
