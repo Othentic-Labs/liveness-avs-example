@@ -3,26 +3,30 @@ const pinataSDK = require("@pinata/sdk");
 const { ethers } = require('ethers');
 // this dalService is common DAL functionallity that is shared between Execution and Validation Service
 const { dalService } = require('./liveliness/dal.service');
+const { getSigningKey, sign } = require('./utils/mcl');
 
 let pinataApiKey='';
 let pinataSecretApiKey='';
 let rpcBaseAddress='';
 let privateKey='';
+var performerAddress='';
 
 function init() {
   pinataApiKey = process.env.PINATA_API_KEY;
   pinataSecretApiKey = process.env.PINATA_SECRET_API_KEY;
   rpcBaseAddress = process.env.OTHENTIC_CLIENT_RPC_ADDRESS;
   privateKey = process.env.PRIVATE_KEY_PERFORMER;
+  performerAddress = process.env.PERFORMER_ADDRESS;
 }
 
 async function sendTask(proofOfTask, data, taskDefinitionId) {
-  let wallet = new ethers.Wallet(privateKey);
-  let performerAddress = wallet.address;
 
   const message = ethers.AbiCoder.defaultAbiCoder().encode(["string", "bytes", "address", "uint16"], [proofOfTask, data, performerAddress, taskDefinitionId]);
   const messageHash = ethers.keccak256(message);
-  const sig = wallet.signingKey.sign(messageHash).serialized;
+
+  const signingKey = getSigningKey(privateKey);
+  const sig = sign(signingKey, messageHash);
+  const sigType = 'bls';
 
   const jsonRpcBody = {
     jsonrpc: "2.0",
@@ -33,6 +37,7 @@ async function sendTask(proofOfTask, data, taskDefinitionId) {
       taskDefinitionId,
       performerAddress,
       sig,
+      sigType
     ]
   };
     try {
