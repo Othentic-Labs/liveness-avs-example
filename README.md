@@ -1,8 +1,8 @@
 # 🍀 Liveness AVS
 
-Liveliness AVS is a service that monitors Operator availability and maintains a dynamic reputation system to ensure reliability across AVSs.
+Liveness AVS is a service that monitors Operator availability and maintains a dynamic reputation system to ensure reliability across AVSs.
 
-Much like Ethereum, AVSs utilize slashing to deter malicious behavior. However, unlike Ethereum, AVSs typically do not account for inactive operators by default. Liveliness AVS solves this by providing a shared network that tracks operator health and facilitates consensus on operator liveness.
+Much like Ethereum, AVSs utilize slashing to deter malicious behavior. However, unlike Ethereum, AVSs typically do not account for inactive operators by default. Liveness AVS solves this by providing a shared network that tracks operator health and facilitates consensus on operator liveness.
 
 ⚠️ This is a Work-in-Progress (WIP) AVS and not a finalized product.
 
@@ -20,7 +20,7 @@ Much like Ethereum, AVSs utilize slashing to deter malicious behavior. However, 
 
 
 ## Overview
-Liveliness AVS performs two primary functions:
+Liveness AVS performs two primary functions:
 
 - Detect Unhealthy Operators: Facilitates decentralized consensus on operator availability and misbehavior.
 
@@ -41,7 +41,7 @@ The `LivelinessRegistry` contract acts as the core registry for operator metadat
 
 - Operator registration and deregistration
 - Health-check endpoint updates
-- Liveliness score calculation
+- Liveness score calculation
 - Penalization after task validation
 
 ### End-to-End Flow
@@ -102,7 +102,7 @@ To start, deploy the AVS Logic Hook contract `LivelinessRegistry`, which manages
 | `register(string endpoint)`          | Registers an operator with a health-check endpoint. Only callable by a valid AVS operator.        |
 | `unregister()`                       | Unregisters an operator from the registry. Only allowed if the operator is no longer in the AVS.  |
 | `changeEndpoint(string endpoint)`    | Updates the operator’s registered health-check endpoint.                                          |
-| `getLivelinessScore(address)`        | Returns the current liveliness score based on uptime minus penalty weight.                        |
+| `getLivelinessScore(address)`        | Returns the current liveness score based on uptime minus penalty weight.                        |
 | `afterTaskSubmission(...)`           | Hook called by the Attestation Center after quorum consensus to penalize unhealthy operators.     |
 
 
@@ -116,8 +116,8 @@ To start, deploy the AVS Logic Hook contract `LivelinessRegistry`, which manages
 
 2. Clone the repo and switch branch
 ```
-git clone https://github.com/Othentic-Labs/liveliness-avs-example.git
-cd liveliness-avs-example
+git clone https://github.com/Othentic-Labs/liveness-avs-example.git
+cd liveness-avs-example
 ```
 
 3. Deploy the LivelinessRegistry Contract: To use hooks, deploy an instance of the LivelinessRegistry contract by navigating to the contracts directory. 
